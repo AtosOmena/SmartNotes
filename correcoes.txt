@@ -1,0 +1,38 @@
+NOTA: 10.0
+
+COMENTÁRIOS:
+Regra 1 - Tecnologias:
+Todas as tecnologias obrigatórias foram usadas durante a implementação.
+
+Regra 2 - Modelos Prisma:
+Os modelos do Prisma foram implementados corretamente.
+
+Regra 3 - Endpoints:
+Todas as rotas da API foram implementadas.
+
+Regra 4 - Validação de senha (Joi):
+As senhas dos usuários seguem todos os critérios pedidos no documento de especificação.
+
+Regra 5 - Segurança:
+- Segredos em variáveis de ambiente: implementado corretamente via `.env` e `dotenv`.
+- Hash de senha: bcryptjs com salt 10, implementado corretamente.
+- Sessão segura: `httpOnly: true`, `sameSite: "lax"`, `saveUninitialized: false` configurados corretamente.
+- Autorização nas notas (IDOR): todas as queries filtram por `userId` e retornam 404, nunca 403.
+- Rate limiting: limite global de 100 req/15min e limite específico de 10 req/15min nos endpoints de auth implementados corretamente.
+- CORS: configurado com `FRONTEND_URL` via variável de ambiente e `credentials: true`.
+- Helmet: configurado com `xPoweredBy: false`, `noSniff: true` e `hsts: true`.
+- Timing attack: `bcrypt.compare` executa sempre via `DUMMY_HASH` quando o usuário não existe.
+
+Regra 6 - Cálculo da nota:
+- Endpoints funcionando (30%): 30
+- Validações Joi (10%): 10
+- Autenticação por sessão (15%): 15
+- Autorização IDOR (15%): 15
+- Rate limiting (5%): 5
+- CORS (5%): 5
+- Hash e segredos em env (10%): 10
+- Timing attack (5%): 5
+- Helmet (5%): 5
+Total: 100% → Nota 10.0
+
+Excelente trabalho, com implementação completa, organizada e atendendo a todos os requisitos de segurança especificados.
