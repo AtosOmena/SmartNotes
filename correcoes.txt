@@ -14,10 +14,10 @@ Regra 4 - Validação de senha (Joi):
 As senhas dos usuários seguem todos os critérios pedidos no documento de especificação.
 
 Regra 5 - Segurança:
-- Segredos em variáveis de ambiente: implementado corretamente via `.env` e `dotenv`.
+- Gerenciamento de segredos: implementado corretamente via `.env` e `dotenv`, nenhum dado sigiloso aparece no código-fonte.
 - Hash de senha: bcryptjs com salt 10, implementado corretamente.
 - Sessão segura: `httpOnly: true`, `sameSite: "lax"`, `saveUninitialized: false` configurados corretamente.
-- Autorização nas notas (IDOR): todas as queries filtram por `userId` e retornam 404, nunca 403.
+- Autorização nas notas (IDOR): todas as queries filtram por `userId` (via `findFirst` com `where: { id, userId }`) e retornam 404 quando a nota não pertence ao usuário, nunca 403.
 - Rate limiting: limite global de 100 req/15min e limite específico de 10 req/15min nos endpoints de auth implementados corretamente.
 - CORS: configurado com `FRONTEND_URL` via variável de ambiente e `credentials: true`.
 - Helmet: configurado com `xPoweredBy: false`, `noSniff: true` e `hsts: true`.
@@ -33,6 +33,5 @@ Regra 6 - Cálculo da nota:
 - Hash e segredos em env (10%): 10
 - Timing attack (5%): 5
 - Helmet (5%): 5
-Total: 100% → Nota 10.0
 
 Excelente trabalho, com implementação completa, organizada e atendendo a todos os requisitos de segurança especificados.
